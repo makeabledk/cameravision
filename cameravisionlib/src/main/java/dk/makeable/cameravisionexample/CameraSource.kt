@@ -16,7 +16,7 @@ package dk.makeable.cameravisionexample
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.support.v7.app.AppCompatActivity
 import android.content.Context
 import android.graphics.ImageFormat
 import android.graphics.SurfaceTexture
@@ -39,7 +39,7 @@ import java.util.*
  * sending those frames to child classes' detectors / classifiers as fast as it is able to process.
  */
 @SuppressLint("MissingPermission")
-class CameraSource(protected var activity: Activity, private val graphicOverlay: GraphicOverlay) {
+class CameraSource(protected var activity: android.support.v7.app.AppCompatActivity, private val graphicOverlay: GraphicOverlay) {
 
     private var camera: Camera? = null
 
