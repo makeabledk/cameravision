@@ -1,4 +1,4 @@
-package dk.makeable.cameravisionexample
+package dk.makeable.cameravisionlib
 
 // Copyright 2018 Google LLC
 //
@@ -537,8 +537,7 @@ class CameraSource(protected var activity: Activity, private val graphicOverlay:
                 try {
                     synchronized(processorLock) {
                         Log.d(TAG, "Draw a frame")
-                        cleanScreen()
-                        graphicsPresenter!!.drawFrame(graphicOverlay)
+                        graphicsPresenter!!.updateFrame(graphicOverlay)
                     }
                 } catch (t: Throwable) {
                     Log.e(TAG, "Exception thrown from receiver.", t)

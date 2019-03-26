@@ -1,4 +1,4 @@
-package dk.makeable.cameravisionexample;
+package dk.makeable.cameravisionlib;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

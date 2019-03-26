@@ -1,4 +1,4 @@
-package dk.makeable.cameravisionexample
+package dk.makeable.cameravisionlib
 
 import androidx.appcompat.app.AppCompatActivity
 

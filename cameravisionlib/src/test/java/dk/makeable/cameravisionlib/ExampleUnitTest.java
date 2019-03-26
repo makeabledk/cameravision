@@ -1,4 +1,4 @@
-package dk.makeable.cameravisionexample;
+package dk.makeable.cameravisionlib;
 
 import org.junit.Test;
 
