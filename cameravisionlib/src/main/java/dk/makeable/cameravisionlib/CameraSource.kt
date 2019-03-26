@@ -87,8 +87,6 @@ class CameraSource(protected var activity: Activity, private val graphicOverlay:
     private val processingRunnable: FrameProcessingRunnable
 
     private val processorLock = Any()
-    // @GuardedBy("processorLock")
-    private var frameProcessor: RecognitionProcessor? = null
 
     /**
      * Map to convert between a byte array, received from the camera, and its associated byte buffer.
@@ -117,10 +115,6 @@ class CameraSource(protected var activity: Activity, private val graphicOverlay:
             stop()
             processingRunnable.release()
             cleanScreen()
-
-            if (frameProcessor != null) {
-                frameProcessor!!.stop()
-            }
         }
     }
 
@@ -416,16 +410,6 @@ class CameraSource(protected var activity: Activity, private val graphicOverlay:
         this.requestedPreviewHeight = requestedHeight
     }
 
-    fun setMachineLearningFrameProcessor(processor: RecognitionProcessor) {
-        synchronized(processorLock) {
-            cleanScreen()
-            if (frameProcessor != null) {
-                frameProcessor!!.stop()
-            }
-            frameProcessor = processor
-        }
-    }
-
     /**
      * This runnable controls access to the underlying receiver, calling it to process frames when
      * available from the camera. This is designed to run detection on frames as fast as possible
@@ -542,20 +526,20 @@ class CameraSource(protected var activity: Activity, private val graphicOverlay:
                 // frame.
 
                 try {
-                    synchronized(processorLock) {
-                        Log.d(TAG, "Process an image")
-                        frameProcessor!!.process(
-                            data,
-
-                            FrameMetadata.Builder()
-                                .setWidth(previewSize!!.width)
-                                .setHeight(previewSize!!.height)
-                                .setRotation(rotation)
-                                .setCameraFacing(cameraFacing)
-                                .build(),
-                            graphicOverlay
-                        )
-                    }
+//                    synchronized(processorLock) {
+//                        Log.d(TAG, "Process an image")
+//                        frameProcessor!!.process(
+//                            data,
+//
+//                            FrameMetadata.Builder()
+//                                .setWidth(previewSize!!.width)
+//                                .setHeight(previewSize!!.height)
+//                                .setRotation(rotation)
+//                                .setCameraFacing(cameraFacing)
+//                                .build(),
+//                            graphicOverlay
+//                        )
+//                    }
                 } catch (t: Throwable) {
                     Log.e(TAG, "Exception thrown from receiver.", t)
                 } finally {
