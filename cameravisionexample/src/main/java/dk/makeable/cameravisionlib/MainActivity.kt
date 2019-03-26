@@ -1,7 +1,10 @@
-package dk.makeable.cameravisionexample
+package dk.makeable.cameravisionlib
 
 import android.os.Bundle
 import android.util.Log
+import dk.makeable.cameravisionexample.CameraVisionActivity
+import dk.makeable.cameravisionexample.GraphicOverlay
+import dk.makeable.cameravisionexample.GraphicsPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : CameraVisionActivity(), GraphicsPresenter {

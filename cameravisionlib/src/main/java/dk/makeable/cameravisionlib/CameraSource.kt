@@ -1,4 +1,4 @@
-package dk.makeable.cameravisionexample
+package dk.makeable.cameravisionlib
 
 // Copyright 2018 Google LLC
 //
@@ -16,13 +16,13 @@ package dk.makeable.cameravisionexample
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.support.v7.app.AppCompatActivity
 import android.content.Context
 import android.graphics.ImageFormat
 import android.graphics.SurfaceTexture
 import android.hardware.Camera
 import android.hardware.Camera.CameraInfo
 import android.support.annotation.RequiresPermission
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.util.Size
 import android.view.Surface
@@ -39,7 +39,7 @@ import java.util.*
  * sending those frames to child classes' detectors / classifiers as fast as it is able to process.
  */
 @SuppressLint("MissingPermission")
-class CameraSource(protected var activity: android.support.v7.app.AppCompatActivity, private val graphicOverlay: GraphicOverlay) {
+class CameraSource(protected var activity: AppCompatActivity, private val graphicOverlay: GraphicOverlay) {
 
     private var camera: Camera? = null
 
@@ -537,8 +537,7 @@ class CameraSource(protected var activity: android.support.v7.app.AppCompatActiv
                 try {
                     synchronized(processorLock) {
                         Log.d(TAG, "Draw a frame")
-                        cleanScreen()
-                        graphicsPresenter!!.drawFrame(graphicOverlay)
+                        graphicsPresenter!!.updateFrame(graphicOverlay)
                     }
                 } catch (t: Throwable) {
                     Log.e(TAG, "Exception thrown from receiver.", t)

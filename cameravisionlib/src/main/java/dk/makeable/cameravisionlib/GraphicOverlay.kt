@@ -1,4 +1,4 @@
-package dk.makeable.cameravisionexample
+package dk.makeable.cameravisionlib
 
 // Copyright 2018 Google LLC
 //
@@ -18,7 +18,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
-import dk.makeable.cameravisionexample.GraphicOverlay.Graphic
+import dk.makeable.cameravisionlib.GraphicOverlay.Graphic
 import java.util.*
 
 /**
