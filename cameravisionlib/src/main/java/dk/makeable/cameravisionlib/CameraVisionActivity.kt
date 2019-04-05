@@ -1,6 +1,6 @@
 package dk.makeable.cameravisionlib
 
-import androidx.appcompat.app.AppCompatActivity
+import android.support.v7.app.AppCompatActivity
 
 
 abstract class CameraVisionActivity : AppCompatActivity() {
