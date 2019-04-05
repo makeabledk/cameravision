@@ -2,6 +2,7 @@ package dk.makeable.cameravisionlib
 
 import androidx.appcompat.app.AppCompatActivity
 
+
 abstract class CameraVisionActivity : AppCompatActivity() {
 
     private var cameraVision: CameraVisionSetup? = null

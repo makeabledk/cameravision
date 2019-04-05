@@ -24,6 +24,7 @@ class CameraVisionSetup(
     private val cameraSource: CameraSource = CameraSource(activity, graphicOverlay)
 
     private var started: Boolean = false
+    private var waitingForPermission: Boolean = false
 
     init {
         // Set the presenter for the camera source
@@ -37,7 +38,7 @@ class CameraVisionSetup(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun start() {
-        if (activity.lifecycle.currentState.isAtLeast(Lifecycle.State.CREATED) && !started) {
+        if (activity.lifecycle.currentState.isAtLeast(Lifecycle.State.CREATED) && !started && !waitingForPermission) {
             secureCameraPermission {
                 started = true
                 Log.d("FIREBASEVISION", "Starting cameraSource with preview width: ${cameraSourcePreview.width}, height: ${cameraSourcePreview.height}")
@@ -61,11 +62,15 @@ class CameraVisionSetup(
     }
 
     private fun secureCameraPermission(onPermissionGranted: () -> Unit) {
+
+        waitingForPermission = true
+
         // Ask the user for permission to use the camera
         TedPermission.with(activity)
             .setPermissionListener(object : PermissionListener {
                 override fun onPermissionGranted() {
                     onPermissionGranted()
+                    waitingForPermission = false
                 }
 
                 override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
